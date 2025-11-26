@@ -69,7 +69,7 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 -- Treesitter
 local config = require("nvim-treesitter.configs")
 config.setup({
-  ensure_installed = { "javascript", "ruby", "html" },
+  ensure_installed = { "javascript", "ruby", "html", "vim", "markdown", "query", "css", "json", "typescript", "yaml", "tsx", "gitignore", "dockerfile", "diff", "c", "bash", },
   highlight = { enable = true },
   indent = { enable = true },
 })
