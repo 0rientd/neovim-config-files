@@ -23,18 +23,28 @@ return {
           "terraformls",
           "yamlls"
         },
+
         handlers = {
+          -- Handler padrão para todos os LSPs
           function(server)
-            vim.lsp.config[server].setup({})
+            require("lspconfig")[server].setup({})
           end,
 
+          -- Configuração especial para o Lua
           lua_ls = function()
-            vim.lsp.config.lua_ls.setup({
+            require("lspconfig").lua_ls.setup({
               settings = {
                 Lua = {
                   diagnostics = { globals = { "vim" } }
                 }
               }
+            })
+          end,
+
+          -- ⭐ CONFIGURAÇÃO CRÍTICA: ruby-lsp com asdf
+          ruby_lsp = function()
+            require("lspconfig").ruby_lsp.setup({
+              cmd = { "asdf", "exec", "ruby", "-S", "ruby-lsp" },
             })
           end,
         }
@@ -45,9 +55,9 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
-      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
-      vim.keymap.set({'n', 'v'}, '<leader>ca', vim.lsp.buf.code_action, {})
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
+      vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
     end
   }
 }
