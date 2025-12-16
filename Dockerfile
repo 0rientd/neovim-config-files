@@ -3,10 +3,11 @@ FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 # -------------------------
-# Dependências do sistema
+# Dependências do sistema (ROOT)
 # -------------------------
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y \
+      sudo \
       curl \
       gh \
       git \
@@ -25,18 +26,22 @@ RUN apt-get update && apt-get upgrade -y && \
       gpg \
       gawk \
       ripgrep \
+      shared-mime-info \
+      libpq-dev \
       gnupg && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # -------------------------
-# Cria usuário não-root
+# Cria usuário não-root com sudo
 # -------------------------
 ARG USERNAME=dev
 ARG UID=1000
 ARG GID=1000
 
 RUN groupadd -g ${GID} ${USERNAME} && \
-    useradd -m -u ${UID} -g ${GID} -s /bin/bash ${USERNAME}
+    useradd -m -u ${UID} -g ${GID} -s /bin/bash ${USERNAME} && \
+    usermod -aG sudo ${USERNAME} && \
+    echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # -------------------------
 # Diretório da aplicação
@@ -45,17 +50,21 @@ WORKDIR /usr/src/app
 RUN chown -R dev:dev /usr/src/app
 
 # -------------------------
+# Variáveis globais
+# -------------------------
+ENV HOME=/home/dev
+ENV ASDF_DIR=/home/dev/.asdf
+ENV PATH="${ASDF_DIR}/bin:${ASDF_DIR}/shims:${PATH}"
+
+# -------------------------
 # Troca para usuário dev
 # -------------------------
 USER dev
-ENV HOME=/home/dev
+SHELL ["/bin/bash", "-lc"]
 
 # -------------------------
 # Instala asdf (user-level)
 # -------------------------
-ENV ASDF_DIR=/home/dev/.asdf
-ENV PATH="${ASDF_DIR}/bin:${ASDF_DIR}/shims:${PATH}"
-
 RUN git clone https://github.com/asdf-vm/asdf.git ${ASDF_DIR} --branch v0.14.0 && \
     echo '. "$ASDF_DIR/asdf.sh"' >> ~/.bashrc && \
     echo '. "$ASDF_DIR/completions/asdf.bash"' >> ~/.bashrc
@@ -64,25 +73,34 @@ RUN git clone https://github.com/asdf-vm/asdf.git ${ASDF_DIR} --branch v0.14.0 &
 RUN asdf plugin-add ruby && \
     asdf plugin-add nodejs
 
-# Instala versões específicas
+# Instala versões
 RUN asdf install ruby 3.4.6 && \
     asdf install nodejs 22.11.0 && \
-    asdf global ruby 3.4.6 && \
-    asdf global nodejs 22.11.0
 
 # -------------------------
-# Instala Neovim v0.11.5 (binário oficial)
+# Instala Neovim (AUTO-DETECT ARCH)
 # -------------------------
-RUN curl -LO https://github.com/neovim/neovim/releases/download/v0.11.5/nvim-linux-x86_64.tar.gz && \
-    tar -C /home/dev -xzf nvim-linux-x86_64.tar.gz && \
-    rm nvim-linux-x86_64.tar.gz
+RUN ARCH="$(uname -m)" && \
+    if [ "$ARCH" = "x86_64" ]; then \
+      NVIM_ARCH="x86_64"; \
+    elif [ "$ARCH" = "aarch64" ]; then \
+      NVIM_ARCH="arm64"; \
+    else \
+      echo "Arquitetura não suportada: $ARCH" && exit 1; \
+    fi && \
+    curl -LO https://github.com/neovim/neovim/releases/download/v0.11.5/nvim-linux-${NVIM_ARCH}.tar.gz && \
+    tar -C /home/dev -xzf nvim-linux-${NVIM_ARCH}.tar.gz && \
+    rm nvim-linux-${NVIM_ARCH}.tar.gz
 
-ENV PATH="/home/dev/nvim-linux-x86_64/bin:${PATH}"
+ENV PATH="/home/dev/nvim-linux-arm64/bin:/home/dev/nvim-linux-x86_64/bin:${PATH}"
 
 # -------------------------
 # Configuração do Neovim
 # -------------------------
 RUN git clone https://github.com/0rientd/neovim-config-files.git /home/dev/.config/nvim
 
+# -------------------------
+# Shell interativo
+# -------------------------
 CMD ["/bin/bash"]
 
