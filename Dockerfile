@@ -2,7 +2,9 @@ FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Atualiza sistema e instala dependências
+# -------------------------
+# Dependências do sistema
+# -------------------------
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y \
       curl \
@@ -21,13 +23,17 @@ RUN apt-get update && apt-get upgrade -y && \
       python3-venv \
       build-essential \
       ca-certificates \
+      dirmngr \
+      postgresql \
+      gpg \
+      gawk \
       gnupg && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/src/app/
 
 # -------------------------
-# Instala NodeJS
+# Instala NodeJS 22 (NodeSource)
 # -------------------------
 RUN NODE_MAJOR=22 && \
     apt-get purge -y nodejs libnode-dev node-* && \
@@ -42,6 +48,24 @@ RUN NODE_MAJOR=22 && \
     apt-get install -y nodejs
 
 # -------------------------
+# Instala asdf
+# -------------------------
+ENV ASDF_DIR=/root/.asdf
+
+RUN git clone https://github.com/asdf-vm/asdf.git ${ASDF_DIR} --branch v0.14.0
+
+# asdf no PATH (para build e runtime)
+ENV PATH="${ASDF_DIR}/bin:${ASDF_DIR}/shims:${PATH}"
+
+# Carrega asdf automaticamente no bash
+RUN echo '. "$ASDF_DIR/asdf.sh"' >> /root/.bashrc && \
+    echo '. "$ASDF_DIR/completions/asdf.bash"' >> /root/.bashrc && \
+    asdf plugin-add ruby && \
+    asdf plugin-add nodejs && \
+    asdf global ruby latest && \
+    asdf global nodejs latest
+
+# -------------------------
 # Instala Neovim v0.11.5 (binário oficial)
 # -------------------------
 RUN curl -LO https://github.com/neovim/neovim/releases/download/v0.11.5/nvim-linux-x86_64.tar.gz && \
@@ -49,7 +73,7 @@ RUN curl -LO https://github.com/neovim/neovim/releases/download/v0.11.5/nvim-lin
     tar -C /opt -xzf nvim-linux-x86_64.tar.gz && \
     rm nvim-linux-x86_64.tar.gz
 
-# Adiciona Neovim ao PATH (global)
+# Neovim no PATH
 ENV PATH="/opt/nvim-linux-x86_64/bin:${PATH}"
 
 # -------------------------
@@ -60,3 +84,4 @@ RUN git clone https://github.com/0rientd/neovim-config-files.git && \
     mv neovim-config-files /root/.config/nvim
 
 CMD ["/bin/bash"]
+
