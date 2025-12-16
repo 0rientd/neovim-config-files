@@ -1,6 +1,4 @@
-# NvChad on Steroids: Your Ultimate Neovim IDE
-
-This is a custom Neovim configuration that turns your editor into a full-fledged IDE for modern development. It's built on top of the rock-solid foundation of LazyVim and comes with a curated set of plugins to boost your productivity.
+That's my custom Neovim configuration that turns your editor into a full-fledged IDE for modern development. It's built on top of the rock-solid foundation of LazyVim and comes with a curated set of plugins to boost your productivity.
 
 ## Features
 
