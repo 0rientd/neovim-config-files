@@ -1,5 +1,5 @@
 {
-  "cyberdream": { "branch": "main", "commit": "a43b45423e8494898c353c0604e0b2e4e99bd056" },
+  "everforest": { "branch": "master", "commit": "b10ed9a8b37d6b7448908be98ff8f58f550adc48" },
   "lazy.nvim": { "branch": "main", "commit": "85c7ff3711b730b4030d03144f6db6375044ae82" },
   "lualine.nvim": { "branch": "master", "commit": "47f91c416daef12db467145e16bed5bbfe00add8" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "c55bd8a8fb191e24176c206a7af1dd51ce7276a5" },

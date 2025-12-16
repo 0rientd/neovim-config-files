@@ -9,21 +9,37 @@ RUN apt-get update && apt-get upgrade -y && \
       gh \
       git \
       libffi-dev \
+      libnode-dev \
       libyaml-dev \
       zlib1g-dev \
       unzip \
       ruby \
       ruby-dev \
-      nodejs \
       npm \
       python3 \
       python3-pip \
       python3-venv \
       build-essential \
-      ca-certificates && \
+      ca-certificates \
+      gnupg && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/src/app/
+
+# -------------------------
+# Instala NodeJS
+# -------------------------
+RUN NODE_MAJOR=22 && \
+    apt-get purge -y nodejs libnode-dev node-* && \
+    apt-get autoremove -y && \
+    rm -rf /var/lib/apt/lists/* && \
+    mkdir -p /etc/apt/keyrings && \
+    curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | \
+      gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
+    echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_${NODE_MAJOR}.x nodistro main" \
+      > /etc/apt/sources.list.d/nodesource.list && \
+    apt-get update && \
+    apt-get install -y nodejs
 
 # -------------------------
 # Instala Neovim v0.11.5 (binário oficial)
