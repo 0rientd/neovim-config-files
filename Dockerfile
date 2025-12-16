@@ -15,9 +15,6 @@ RUN apt-get update && apt-get upgrade -y && \
       libyaml-dev \
       zlib1g-dev \
       unzip \
-      ruby \
-      ruby-dev \
-      npm \
       python3 \
       python3-pip \
       python3-venv \
@@ -51,19 +48,19 @@ RUN NODE_MAJOR=22 && \
 # Instala asdf
 # -------------------------
 ENV ASDF_DIR=/root/.asdf
+ENV PATH="${ASDF_DIR}/bin:${ASDF_DIR}/shims:${PATH}"
 
 RUN git clone https://github.com/asdf-vm/asdf.git ${ASDF_DIR} --branch v0.14.0
 
-# asdf no PATH (para build e runtime)
-ENV PATH="${ASDF_DIR}/bin:${ASDF_DIR}/shims:${PATH}"
+# Plugins
+RUN asdf plugin-add ruby && \
+    asdf plugin-add nodejs
 
-# Carrega asdf automaticamente no bash
-RUN echo '. "$ASDF_DIR/asdf.sh"' >> /root/.bashrc && \
-    echo '. "$ASDF_DIR/completions/asdf.bash"' >> /root/.bashrc && \
-    asdf plugin-add ruby && \
-    asdf plugin-add nodejs && \
-    asdf global ruby latest && \
-    asdf global nodejs latest
+# Instala versões específicas
+RUN asdf install ruby 3.3.6 && \
+    asdf install nodejs 22.11.0 && \
+    asdf global ruby 3.3.6 && \
+    asdf global nodejs 22.11.0
 
 # -------------------------
 # Instala Neovim v0.11.5 (binário oficial)
@@ -84,4 +81,3 @@ RUN git clone https://github.com/0rientd/neovim-config-files.git && \
     mv neovim-config-files /root/.config/nvim
 
 CMD ["/bin/bash"]
-
