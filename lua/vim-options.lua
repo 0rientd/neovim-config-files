@@ -8,3 +8,6 @@ vim.g.mapleader = " "
 vim.keymap.set('n', '<leader>gd', ':! git diff --graph<CR>', {})
 vim.keymap.set('n', '<leader>gs', ':! git status<CR>', {})
 vim.keymap.set('n', '<leader>gp', ':! git pull<CR>', {})
+
+vim.env.ASDF_DIR = "/home/dev/.asdf"
+vim.env.PATH = vim.env.ASDF_DIR .. "/shims:" .. vim.env.PATH

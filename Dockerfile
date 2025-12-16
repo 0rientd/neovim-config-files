@@ -75,7 +75,8 @@ RUN asdf plugin-add ruby && \
 
 # Instala versões
 RUN asdf install ruby 3.4.6 && \
-    asdf install nodejs 22.11.0 && \
+    asdf install ruby 3.3.6 && \
+    asdf install nodejs 20.10.0 \
 
 # -------------------------
 # Instala Neovim (AUTO-DETECT ARCH)
