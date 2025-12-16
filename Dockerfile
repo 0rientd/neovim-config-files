@@ -23,7 +23,7 @@ RUN apt-get update && apt-get upgrade -y && \
       ca-certificates && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /root
+WORKDIR /usr/src/app/
 
 # -------------------------
 # Instala Neovim v0.11.5 (binário oficial)
