@@ -31,12 +31,12 @@ return {
         handlers = {
           -- Handler padrão (exceto Ruby)
           function(server)
-            require("lspconfig")[server].setup({})
+            vim.lsp.config(server, {})
           end,
 
           -- Lua com config especial
           lua_ls = function()
-            require("lspconfig").lua_ls.setup({
+            vim.lsp.config("lua_ls", {
               settings = {
                 Lua = {
                   diagnostics = {
@@ -52,27 +52,24 @@ return {
   },
 
   -- -------------------------
-  -- LSPConfig manual
+  -- LSPConfig manual (Ruby)
   -- -------------------------
   {
     "neovim/nvim-lspconfig",
     config = function()
-      local lspconfig = require("lspconfig")
-      local util = require("lspconfig.util")
-
-      -- Keymaps globais
+      -- Keymaps globais 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
       vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
 
-      lspconfig.ruby_lsp.setup({
+      vim.lsp.config("ruby_lsp", {
         cmd = { "bundle", "exec", "ruby-lsp" },
         filetypes = { "ruby" },
-        root_dir = util.root_pattern(
+        root_dir = vim.fs.root(0, {
           "Gemfile",
           ".tool-versions",
           ".ruby-version"
-        ),
+        }),
       })
     end
   }

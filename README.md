@@ -23,6 +23,7 @@ This configuration includes the following plugins:
 *   `telescope`
 *   `treesitter`
 
+
 ## Custom Configurations
 
 This project also includes custom configurations located in the `some-custom-configs/` directory. These are separate configurations that can be used as a reference or swapped out with the main configuration.

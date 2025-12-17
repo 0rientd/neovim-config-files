@@ -1,5 +1,0 @@
--- All plugins used
-return {
-
-}
-
