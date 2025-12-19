@@ -1,4 +1,4 @@
 return {
   "sindrets/diffview.nvim",
-  opts = {},
+  vim.keymap.set("n", "<leader>gh", ':DiffviewFileHistory<CR>', {})
 }
