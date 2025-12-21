@@ -2,6 +2,8 @@
 
 A personalized Neovim setup that transforms your editor into a slick, modern IDE. Built on the speed of [LazyVim](https://www.lazyvim.org/).
 
+<img width="1792" height="1132" alt="Captura de Tela 2025-12-21 às 11 20 12" src="https://github.com/user-attachments/assets/23407689-c44c-4dba-a7ef-2b47208c5298" />
+
 ### ✨ Features
 
 *   ⚡️ **Fast & Lazy:** Managed with `lazy.nvim`.
@@ -10,7 +12,7 @@ A personalized Neovim setup that transforms your editor into a slick, modern IDE
 *   🌲 **File Explorer:** `neo-tree` for easy navigation.
 *   🔍 **Fuzzy Finder:** `telescope.nvim` to find anything, anywhere.
 *   🌈 **Better Syntax:** `treesitter` for beautiful and accurate highlighting.
-*    स्टेटस **Cool Statusline:** `lualine` keeps you informed.
+*   🌕 **Cool Statusline:** `lualine` keeps you informed.
 
 ### 🐳 Test Drive with Docker
 
