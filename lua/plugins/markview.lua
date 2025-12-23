@@ -2,6 +2,6 @@ return {
 	"OXY2DEV/markview.nvim",
 	lazy = false,
 	config = function()
-		vim.keymap.set("n", "<leader>mt", ':Markview toggle<CR>', {})
+		vim.keymap.set("n", "<leader>md", ':Markview toggle<CR>', {})
 	end,
 }
