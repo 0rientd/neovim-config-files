@@ -5,23 +5,15 @@ return {
     local alpha = require("alpha")
     local dashboard = require("alpha.themes.dashboard")
 
-    math.randomseed(os.time())
-
-    local function pick_color()
-      local colors = { "String", "Identifier", "Keyword", "Number" }
-      return colors[math.random(#colors)]
-    end
-
     local function footer()
       return {
-        "🚀 Have a productive session",
         os.date(" %d/%m/%Y   %H:%M"),
       }
     end
 
     local logo = {
       "⠀⠀⠀⠀⣠⣶⡾⠏⠉⠙⠳⢦⡀⠀⠀⠀⢠⠞⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠙⠲⡀⠀",
-      "⠀⠀⠀⣴⠿⠏⠀⠀⠀⠀⠀⠀⢳⡀⠀⡏⠀⠀⠀              ⠀⠀⢷",
+      "⠀⠀⠀⣴⠿⠏⠀⠀⠀⠀⠀⠀⢳⡀ ⠀⡏⠀⠀              ⠀⠀⢷",
       "⠀⠀⢠⣟⣋⡀⢀⣀⣀⡀⠀⣀⡀⣧⠀⢸⠀⠀⠀            ⠀⠀   ⡇",
       "⠀⠀⢸⣯⡭⠁⠸⣛⣟⠆⡴⣻⡲⣿⠀⣸⠀⠀Já treinou hoje?⠀ ⡇",
       "⠀⠀⣟⣿⡭⠀⠀⠀⠀⠀⢱⠀⠀⣿⠀⢹⠀⠀⠀⠀⠀               ⡇",
@@ -35,12 +27,15 @@ return {
     }
 
     dashboard.section.header.val = logo
-    dashboard.section.header.opts.hl = pick_color()
+    dashboard.section.header.opts.hl = "Keyword"
 
     dashboard.section.buttons.val = {
-      dashboard.button("<Ctrl>p", "⌖  Telescope"),
-      dashboard.button("U", "  Update plugins", ":Lazy sync<CR>"),
-      dashboard.button("q", "  Quit", ":qa<cr>"),
+      dashboard.button("<leader>ft", "👨‍💻 Open Terminal", "<CMD>lua require('FTerm').toggle()<CR>"),
+      dashboard.button("<Ctrl>p", "🔭 Telescope"),
+      dashboard.button("<Ctrl>n", "📂 Open Neo-tree"),
+      dashboard.button("U", "🆙 Update Plugins", ":Lazy sync<CR>"),
+      dashboard.button("M", "🔎 Open Mason", ":Mason<CR>"),
+      dashboard.button("q", "🏃‍♀️ Quit", ":qa<cr>"),
     }
 
     dashboard.section.footer.val = footer()
