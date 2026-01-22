@@ -33,6 +33,7 @@ RUN apt-get update && apt-get upgrade -y && \
       wget \
       luarocks \
       mercurial \
+      libvips \
       gnupg && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
