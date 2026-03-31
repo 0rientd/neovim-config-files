@@ -30,6 +30,11 @@ RUN apt-get update && apt-get upgrade -y && \
       libpq-dev \
       zsh \
       bat \
+      fd-find \
+      wget \
+      luarocks \
+      mercurial \
+      libvips \
       gnupg && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
