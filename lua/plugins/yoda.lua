@@ -7,7 +7,7 @@ return {
 
       -- Style options
       italic_comments = true,
-      transparent_background = false,
+      transparent_background = true,
       bold_keywords = true,
       underline_match_paren = true,
 
