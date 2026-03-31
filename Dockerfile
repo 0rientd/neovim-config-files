@@ -29,6 +29,7 @@ RUN apt-get update && apt-get upgrade -y && \
       shared-mime-info \
       libpq-dev \
       zsh \
+      bat \
       gnupg && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
