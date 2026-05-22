@@ -1,10 +1,19 @@
 return {
   "folke/twilight.nvim",
-  opts = {},
+  cmd = { "Twilight", "TwilightEnable", "TwilightDisable" },
+  keys = {
+    { '<leader>tw', '<cmd>Twilight<CR>', desc = "Toggle Twilight" },
+  },
   config = function()
-    -- Keymap manual
-    vim.keymap.set("n", "<leader>tw", "<cmd>Twilight<CR>", { desc = "Toggle Twilight" })
+    require("twilight").setup({
+      dimming = {
+        alpha = 0.25,
+      },
+      context = 10,
+      treesitter = true,
+    })
 
+    -- Auto enable in insert mode
     local group = vim.api.nvim_create_augroup("TwilightInsertMode", { clear = true })
 
     vim.api.nvim_create_autocmd("InsertEnter", {
