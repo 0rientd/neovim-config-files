@@ -301,6 +301,101 @@ Este documento contém todos os atalhos e comandos disponíveis nesta configura�
 
 ---
 
+## 🐛 Debug (DAP)
+
+| Tecla | Descrição |
+|-------|-----------|
+| `<leader>db` | Toggle breakpoint |
+| `<leader>dB` | Breakpoint condicional |
+| `<leader>dc` | Continue / Iniciar debug |
+| `<leader>dr` | Restart debug |
+| `<leader>dt` | Terminar debug |
+| `<leader>do` | Step over |
+| `<leader>di` | Step into |
+| `<leader>dO` | Step out |
+| `<leader>du` | Toggle DAP UI |
+| `<leader>de` | Eval expression |
+
+---
+
+## 🔧 CMake (C++)
+
+| Tecla | Descrição |
+|-------|-----------|
+| `<leader>cc` | CMake configure |
+| `<leader>cb` | CMake build |
+| `<leader>cr` | CMake run |
+| `<leader>cd` | CMake debug |
+| `<leader>cC` | CMake clean |
+| `<leader>cs` | Selecionar build target |
+| `<leader>cS` | Selecionar launch target |
+| `<leader>ct` | Selecionar build type |
+
+---
+
+## 🤖 AI (CodeCompanion + LM Studio)
+
+| Tecla | Descrição |
+|-------|-----------|
+| `<leader>aa` | Toggle chat de IA |
+| `<leader>ai` | AI inline (seleção) |
+| `<leader>aq` | AI quick actions |
+| `<leader>ac` | Adicionar seleção ao chat |
+
+> **Nota:** Requer LM Studio rodando localmente em `localhost:1234`.
+
+---
+
+## 📑 Bufferline (Abas)
+
+| Tecla | Descrição |
+|-------|-----------|
+| `<leader>1..9` | Ir para buffer 1-9 |
+| `<leader>bp` | Pick buffer |
+| `<leader>bco` | Fechar outros buffers |
+| `<leader>bcl` | Fechar buffers à esquerda |
+| `<leader>bcr` | Fechar buffers à direita |
+
+---
+
+## 🌿 Git (Gitsigns)
+
+| Tecla | Descrição |
+|-------|-----------|
+| `]h` | Próximo hunk |
+| `[h` | Hunk anterior |
+| `<leader>hs` | Stage hunk |
+| `<leader>hr` | Reset hunk |
+| `<leader>hp` | Preview hunk |
+| `<leader>hb` | Blame line |
+| `<leader>tb` | Toggle blame inline |
+| `<leader>hd` | Diff this |
+
+---
+
+## 🔍 Trouble (Diagnostics)
+
+| Tecla | Descrição |
+|-------|-----------|
+| `<leader>xx` | Toggle diagnostics |
+| `<leader>xX` | Diagnostics do buffer |
+| `<leader>xs` | Symbols |
+| `<leader>xl` | LSP refs/defs |
+| `<leader>xQ` | Quickfix list |
+
+---
+
+## 💾 Sessions
+
+| Tecla | Descrição |
+|-------|-----------|
+| `<leader>Ss` | Salvar sessão |
+| `<leader>Sr` | Restaurar sessão |
+| `<leader>Sd` | Deletar sessão |
+| `<leader>Sf` | Procurar sessão |
+
+---
+
 ## 🛠️ Ferramentas
 
 ### Which Key (Ajuda de Teclas)
@@ -324,16 +419,16 @@ Este documento contém todos os atalhos e comandos disponíveis nesta configura�
 |-------|-----------|
 | `<leader>md` | Toggle preview do Markdown |
 
-### Copilot
-
-O GitHub Copilot funciona automaticamente ao digitar código. Use:
+### Autocomplete (nvim-cmp)
 
 | Tecla | Descrição |
 |-------|-----------|
-| `Tab` | Aceitar sugestão |
-| `Ctrl+]` | Dispensar sugestão |
-| `Alt+]` | Próxima sugestão |
-| `Alt+[` | Sugestão anterior |
+| `<C-Space>` | Abrir menu de completion |
+| `<CR>` | Confirmar seleção |
+| `<Tab>` | Próximo item / expandir snippet |
+| `<S-Tab>` | Item anterior |
+| `<C-b>` | Scroll docs para cima |
+| `<C-f>` | Scroll docs para baixo |
 
 ---
 
@@ -398,10 +493,14 @@ O prefixo `<leader>` (Espaço) organiza os comandos por categoria:
 | `<leader>b` | Buffers |
 | `<leader>l` | LSP |
 | `<leader>t` | Toggle/Tools |
-| `<leader>c` | Code |
-| `<leader>d` | Diagnostics |
+| `<leader>c` | Code/CMake |
+| `<leader>d` | Debug |
+| `<leader>x` | Diagnostics/Trouble |
+| `<leader>a` | AI |
+| `<leader>h` | Hunk/Git |
 | `<leader>m` | Markdown |
 | `<leader>v` | Vim/Config |
+| `<leader>S` | Session |
 
 > **Dica:** Pressione `<leader>` e aguarde para ver todas as opções disponíveis com which-key!
 

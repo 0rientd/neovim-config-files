@@ -26,8 +26,9 @@ return {
     local alpha = require("alpha")
     local dashboard = require("alpha.themes.dashboard")
 
+    math.randomseed(os.time())
+
     local function frase_random()
-      math.randomseed(os.time())
       local randomIndex = math.random(#frases)
       return frases[randomIndex]
     end

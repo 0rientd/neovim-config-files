@@ -19,11 +19,15 @@ return {
       { "<leader>b", group = "Buffers" },
       { "<leader>l", group = "LSP" },
       { "<leader>t", group = "Toggle/Tools" },
-      { "<leader>c", group = "Code" },
-      { "<leader>d", group = "Diagnostics" },
+      { "<leader>c", group = "Code/CMake" },
+      { "<leader>d", group = "Debug" },
+      { "<leader>x", group = "Diagnostics/Trouble" },
       { "<leader>m", group = "Markdown" },
       { "<leader>v", group = "Vim/Config" },
       { "<leader>w", group = "Window", proxy = "<C-w>" },
+      { "<leader>a", group = "AI" },
+      { "<leader>h", group = "Hunk/Git" },
+      { "<leader>S", group = "Session" },
     })
   end,
   keys = {

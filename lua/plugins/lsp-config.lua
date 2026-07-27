@@ -33,7 +33,7 @@ return {
         ensure_installed = {
           "lua_ls",
         },
-        automatic_installation = false,
+        automatic_installation = true,
       })
     end,
   },
@@ -49,6 +49,9 @@ return {
       "williamboman/mason-lspconfig.nvim",
     },
     config = function()
+      -- nvim-cmp capabilities
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
       -- Diagnostic configuration
       vim.diagnostic.config({
         virtual_text = {
@@ -116,6 +119,7 @@ return {
         cmd = { "lua-language-server" },
         filetypes = { "lua" },
         root_markers = { ".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git" },
+        capabilities = capabilities,
         settings = {
           Lua = {
             runtime = { version = "LuaJIT" },
@@ -134,6 +138,7 @@ return {
         cmd = { "ruby-lsp" },
         filetypes = { "ruby", "eruby" },
         root_markers = { "Gemfile", ".ruby-version", ".ruby-gemset", ".git" },
+        capabilities = capabilities,
       }
 
       -- TypeScript/JavaScript
@@ -141,6 +146,7 @@ return {
         cmd = { "typescript-language-server", "--stdio" },
         filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
         root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
+        capabilities = capabilities,
       }
 
       -- Python
@@ -148,6 +154,7 @@ return {
         cmd = { "pylsp" },
         filetypes = { "python" },
         root_markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" },
+        capabilities = capabilities,
       }
 
       -- JSON
@@ -155,6 +162,7 @@ return {
         cmd = { "vscode-json-language-server", "--stdio" },
         filetypes = { "json", "jsonc" },
         root_markers = { ".git" },
+        capabilities = capabilities,
       }
 
       -- HTML
@@ -162,6 +170,7 @@ return {
         cmd = { "vscode-html-language-server", "--stdio" },
         filetypes = { "html", "templ" },
         root_markers = { ".git" },
+        capabilities = capabilities,
       }
 
       -- CSS
@@ -169,6 +178,7 @@ return {
         cmd = { "vscode-css-language-server", "--stdio" },
         filetypes = { "css", "scss", "less" },
         root_markers = { ".git" },
+        capabilities = capabilities,
       }
 
       -- YAML
@@ -176,6 +186,7 @@ return {
         cmd = { "yaml-language-server", "--stdio" },
         filetypes = { "yaml", "yaml.docker-compose", "yaml.gitlab" },
         root_markers = { ".git" },
+        capabilities = capabilities,
       }
 
       -- Docker
@@ -183,13 +194,15 @@ return {
         cmd = { "docker-langserver", "--stdio" },
         filetypes = { "dockerfile" },
         root_markers = { "Dockerfile", ".git" },
+        capabilities = capabilities,
       }
 
       -- C/C++ (clangd)
       vim.lsp.config.clangd = {
-        cmd = { "clangd" },
+        cmd = { "clangd", "--background-index", "--clang-tidy", "--header-insertion=iwyu", "--completion-style=bundled", "--cross-file-rename" },
         filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
         root_markers = { ".clangd", ".clang-tidy", ".clang-format", "compile_commands.json", "compile_flags.txt", "configure.ac", ".git" },
+        capabilities = capabilities,
       }
 
       -- -------------------------

@@ -15,19 +15,19 @@ return {
       },
     })
 
-    -- Configura highlights para remover fundo preto e manter bordas
+    -- Configura highlights dinâmicos baseados no tema atual
+    local function set_term_highlights()
+      local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = "String" })
+      local fg = (ok and hl.fg) and string.format("#%06x", hl.fg) or "#98c379"
+      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+      vim.api.nvim_set_hl(0, "FloatBorder", { fg = fg, bg = "none" })
+    end
+
     vim.api.nvim_create_autocmd("ColorScheme", {
       pattern = "*",
-      callback = function()
-        -- Fundo da floating window igual ao Normal
-        vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-        -- Borda verde
-        vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#98c379", bg = "none" })
-      end,
+      callback = set_term_highlights,
     })
 
-    -- Aplicar imediatamente também
-    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-    vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#98c379", bg = "none" })
+    set_term_highlights()
   end
 }

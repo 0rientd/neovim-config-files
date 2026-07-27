@@ -19,12 +19,18 @@ Uma configuração pessoal do Neovim que transforma seu editor em uma IDE modern
 | 🌈 Syntax Highlight | `nvim-treesitter` | Destaque de sintaxe preciso |
 | 📊 Statusline | `lualine.nvim` | Barra de status informativa |
 | 💻 Terminal | `FTerm.nvim` | Terminal flutuante integrado |
-| 🤖 AI Assistant | `copilot.vim` | GitHub Copilot para sugestões de código |
+| 🤖 AI Assistant | `codecompanion.nvim` | IA local via LM Studio (OpenAI-compatible) |
 | 📝 Markdown | `markview.nvim` | Preview de Markdown inline |
-| 🔀 Git | `diffview.nvim` + `git-conflict.nvim` | Visualização de diffs e resolução de conflitos |
+| 🔀 Git | `diffview.nvim` + `git-conflict.nvim` + `gitsigns.nvim` | Visualização de diffs, conflitos e blame inline |
 | ⌨️ Keymaps | `which-key.nvim` | Ajuda interativa de atalhos |
 | 🎯 Focus | `twilight.nvim` | Modo foco para concentração |
 | 💬 UI | `noice.nvim` | UI moderna para mensagens e comandos |
+| 🔧 C++ / CMake | `cmake-tools.nvim` + `clangd_extensions.nvim` | Build, run, debug e inlay hints para C++ |
+| 🐛 Debug | `nvim-dap` + `nvim-dap-ui` + `codelldb` | Debugging estilo VS Code |
+| 📑 Buffers | `bufferline.nvim` | Navegação tipo abas |
+| 🔍 Diagnostics | `trouble.nvim` | Lista consolidada de diagnostics |
+| 💾 Sessions | `auto-session` | Salva/restaura sessões automaticamente |
+| ⚡ Completion | `nvim-cmp` + `LuaSnip` | Autocomplete inteligente com snippets |
 
 ---
 
@@ -171,24 +177,33 @@ Use `i` para instalar os servidores de linguagem que você precisa:
 └── lua/
     ├── vim-options.lua   # Opções gerais do Vim
     └── plugins/          # Configurações de plugins
-        ├── alpha.lua         # Dashboard
-        ├── diffview.lua      # Git diff
-        ├── everforest.lua    # Tema alternativo
-        ├── fterm.lua         # Terminal flutuante
-        ├── git-conflict.lua  # Resolução de conflitos
-        ├── github-copilot.lua # GitHub Copilot
-        ├── lsp-config.lua    # LSP + Mason
-        ├── lualine.lua       # Statusline
-        ├── markview.lua      # Markdown preview
-        ├── neo-tree.lua      # File explorer
-        ├── neoscroll.lua     # Scroll suave
-        ├── noice.lua         # UI moderna
-        ├── none-ls.lua       # Formatters/Linters
-        ├── telescope.lua     # Fuzzy finder
-        ├── treesitter.lua    # Syntax highlighting
-        ├── twilight.lua      # Modo foco
-        ├── which-key.lua     # Ajuda de teclas
-        └── yoda.lua          # Tema principal
+        ├── alpha.lua              # Dashboard
+        ├── auto-session.lua       # Gestão de sessões
+        ├── bufferline.lua         # Abas de buffers
+        ├── clangd-extensions.lua # Extensões C++
+        ├── cmake-tools.lua        # Integração CMake
+        ├── codecompanion.lua      # IA local (LM Studio)
+        ├── dap.lua                # Debugging
+        ├── diffview.lua           # Git diff
+        ├── everforest.lua         # Tema alternativo
+        ├── fterm.lua              # Terminal flutuante
+        ├── gitsigns.lua           # Git gutter/blame
+        ├── git-conflict.lua       # Resolução de conflitos
+        ├── lsp-config.lua         # LSP + Mason
+        ├── lualine.lua            # Statusline
+        ├── markview.lua           # Markdown preview
+        ├── neo-tree.lua           # File explorer
+        ├── neoscroll.lua          # Scroll suave
+        ├── noice.lua              # UI moderna
+        ├── none-ls.lua            # Formatters/Linters
+        ├── nvim-cmp.lua           # Autocomplete
+        ├── startup-time.lua       # Profiler de startup
+        ├── telescope.lua          # Fuzzy finder
+        ├── treesitter.lua         # Syntax highlighting
+        ├── trouble.lua            # Diagnostics consolidados
+        ├── twilight.lua           # Modo foco
+        ├── which-key.lua          # Ajuda de teclas
+        └── yoda.lua               # Tema principal
 ```
 
 ---

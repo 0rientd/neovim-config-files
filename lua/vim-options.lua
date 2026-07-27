@@ -167,3 +167,18 @@ vim.keymap.set('v', 'p', '"_dP', opts)
 
 -- Quick access to config
 vim.keymap.set('n', '<leader>vc', ':e $MYVIMRC<CR>', { desc = "Edit Config" })
+vim.keymap.set('n', '<leader>so', ':source $MYVIMRC<CR>', { desc = "Source Config" })
+
+-- Auto-format on save (if LSP supports formatting)
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = vim.api.nvim_create_augroup("auto-format", { clear = true }),
+  callback = function()
+    local clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
+    for _, client in ipairs(clients) do
+      if client.supports_method("textDocument/formatting") then
+        vim.lsp.buf.format({ async = false, timeout_ms = 2000 })
+        return
+      end
+    end
+  end,
+})
